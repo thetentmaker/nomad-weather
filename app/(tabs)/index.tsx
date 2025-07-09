@@ -1,41 +1,65 @@
-// import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+
+const {width: SCREEN_WIDTH } = Dimensions.get('window');
+console.log(SCREEN_WIDTH);
 
 export default function HomeScreen() {
   return (
-      <View style={{flex: 1}}>
-        <View style={{flex:1, backgroundColor:"tomato"}}></View>
-        <View style={{flex:1.5, backgroundColor:"teal"}}></View>
-        <View style={{flex:1, backgroundColor:"orange"}}></View>
+      <View style={styles.container}>
+        <View style={styles.city}>
+          <Text style={styles.cityName}>Seoul</Text>
+        </View>
+        <ScrollView 
+        pagingEnabled 
+        horizontal 
+        contentContainerStyle={styles.weather}>
+          <View style={styles.day}>
+            <Text style={styles.temp}>20</Text>
+            <Text style={styles.description}>Sunny</Text>
+          </View>
+          <View style={styles.day}>
+            <Text style={styles.temp}>20</Text>
+            <Text style={styles.description}>Sunny</Text>
+          </View>
+          <View style={styles.day}>
+            <Text style={styles.temp}>20</Text>
+            <Text style={styles.description}>Sunny</Text>
+          </View>
+          <View style={styles.day}>
+            <Text style={styles.temp}>20</Text>
+            <Text style={styles.description}>Sunny</Text>
+          </View>
+        </ScrollView>
       </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor:"white",
-    alignItems: "center",
+    flex: 1, backgroundColor: "tomato"
+  },
+  city: {
+    flex: 1.2,
     justifyContent: "center",
+    alignItems: "center",
   },
-  text: {
-    fontSize: 28,
-    color: "black"
+  weather: {
+    backgroundColor: "blue",
   },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  cityName: {
+    fontSize: 68,
+    fontWeight: "500",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  day: {
+    width: SCREEN_WIDTH,
+    alignItems: "center",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  temp: {
+    marginTop: 50,
+    fontSize: 178,
   },
-});
+  description: {
+    fontSize: 30,
+    marginTop: -30,
+  },
+})
