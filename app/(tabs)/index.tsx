@@ -45,7 +45,7 @@ export default function HomeScreen() {
         const city = geocode[0].city || geocode[0].region || "Unknown";
         setCity(city)
         console.log(city)
-        const response = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&appid=${API_KEY}`)
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&exclude=alerts,hourly,minutely,current&appid=${API_KEY}`)
         const json = await response.json()
         console.log(json)
       } else {
