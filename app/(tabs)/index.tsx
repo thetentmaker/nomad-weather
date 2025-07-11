@@ -77,7 +77,6 @@ export default function HomeScreen() {
             temp: json.main.temp,
           };
         });
-        console.log(fakeDays);
         setDays(fakeDays);
       }
 
@@ -93,6 +92,16 @@ export default function HomeScreen() {
     getWeather()
   }, [])
 
+  const renderWeather = () => {
+    if (days.length === 0) {
+      return (
+        <View style={styles.day}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      );
+    }
+    return days.map((item) => <DayWeatherItem key={item.day} {...item} />);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.city}>
@@ -103,36 +112,24 @@ export default function HomeScreen() {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.weather}>
-        {days.length === 0 ? (
-          <View style={styles.day}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        ) : (
-          days.map((item) => (
-            <View key={item.day} style={styles.day}>
-              <View style={
-                {
-                  flexDirection: "row",
-                  alignItems: "center",
-                  width: "100%",
-                  justifyContent: "space-between",
-                  paddingEnd: 16
-                }
-              }>
-                <Text style={styles.temp}>
-                  {parseFloat(item.temp).toFixed(1)}
-                </Text>
-                <Fontisto
-                  name={icons[item.main as keyof typeof icons] as any}
-                  size={68}
-                  color="black"
-                />
-              </View>
-              <Text style={styles.description}>{item.main}</Text>
-            </View>
-          ))
-        )}
+        {renderWeather()}
       </ScrollView>
+    </View>
+  );
+}
+
+function DayWeatherItem({ day, main, temp }: DayWeather) {
+  return (
+    <View key={day} style={styles.day}>
+      <View style={styles.tempContainer}>
+        <Text style={styles.temp}>{parseFloat(temp).toFixed(1)}</Text>
+        <Fontisto
+          name={icons[main as keyof typeof icons] as any}
+          size={68}
+          color="black"
+        />
+      </View>
+      <Text style={styles.description}>{main}</Text>
     </View>
   );
 }
@@ -160,6 +157,12 @@ const styles = StyleSheet.create({
   temp: {
     marginTop: 50,
     fontSize: 110,
+  },
+  tempContainer: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    paddingEnd: 16
   },
   description: {
     fontSize: 30,
