@@ -92,16 +92,6 @@ export default function HomeScreen() {
     getWeather()
   }, [])
 
-  const renderWeather = () => {
-    if (days.length === 0) {
-      return (
-        <View style={styles.day}>
-          <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-      );
-    }
-    return days.map((item) => <DayWeatherItem key={item.day} {...item} />);
-  };
   return (
     <View style={styles.container}>
       <View style={styles.city}>
@@ -112,7 +102,27 @@ export default function HomeScreen() {
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.weather}>
-        {renderWeather()}
+        {days.length === 0 ? (
+          <View style={styles.day}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        ) : (
+          days.map((item) => (
+            <View key={item.day} style={styles.day}>
+              <View style={{...styles.tempContainer, alignItems:"center"}}>
+                <Text style={styles.temp}>
+                  {parseFloat(item.temp).toFixed(1)}
+                </Text>
+                <Fontisto
+                  name={icons[item.main as keyof typeof icons] as any}
+                  size={68}
+                  color="black"
+                />
+              </View>
+              <Text style={styles.description}>{item.main}</Text>
+            </View>
+          ))
+        )}
       </ScrollView>
     </View>
   );
