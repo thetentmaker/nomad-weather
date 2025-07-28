@@ -2,11 +2,11 @@
 
 ## Android 실행 화면
 
-![Android 실행 화면](assets/images/sh_android.png)
+![Android 실행 화면](images/sh_android.png)
 
 ## iOS 실행 화면
 
-![iOS 실행 화면](assets/images/sh_ios.png)
+![iOS 실행 화면](images/sh_ios.png)
 
 ---
 
