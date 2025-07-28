@@ -1,5 +1,6 @@
 # NomadWeather
 
+|Android|iOS|
 |-|-|
 |<img src="images/sh_android.png" alt="Android 실행 화면" width="250"/>|<img src="images/sh_ios.png" alt="iOS 실행 화면" width="250"/>|
 ---
